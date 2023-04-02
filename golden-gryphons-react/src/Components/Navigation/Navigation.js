@@ -14,14 +14,14 @@ const NavLinks = () => {
 
   const navList = navItems.map((nav, index) => (
     <li key={index}>
-      <a href={nav.url}>{nav.name}</a>
+      <a href={nav.url} style={{ marginRight: "30px" , fontSize: "24px", fontFamily: "Arial", color: "#a18525"}}>{nav.name}</a>
     </li>
   ));
 
   return (
     <div>
       <section id = "navigation">
-        <ul className = "navigation-list">
+        <ul className = "navigation-list" style={{ display: "inline-flex" }}>
           {navList}
         </ul>
       </section>
