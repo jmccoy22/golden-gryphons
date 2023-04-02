@@ -1,32 +1,159 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const Tickets_Membership = () => {
- 
+
+function TicketMembershipForm() {
+  const [activeForm, setActiveForm] = useState('tickets');
+  const [dateOfBirth, setDateOfBirth] = useState(null);
+  const [matchDateTime, setMatchDateTime] = useState(null);
+  const [formData, setFormData] = useState({});
+  const [submissionMessage, setSubmissionMessage] = useState('');
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission based on activeForm value
+    if (activeForm === 'tickets') {
+      // Handle ticket form submission
+      // Here we are just simulating a submission with a timeout function
+      setTimeout(() => {
+        setSubmissionMessage('Your ticket/s have been sent to your email.');
+      }, 2000);
+    } else {
+      // Handle membership form submission
+      // Here we are just simulating a submission with a timeout function
+      setTimeout(() => {
+        setSubmissionMessage('Thank you, we will be in touch.');
+      }, 2000);
+    }
+  };
+
   return (
-	<div className="Tickets_Membership">
-    <section id = "tickets_membership">
-     <h1>Tickets & Membership</h1> 
-     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut lectus arcu bibendum at varius. Tortor dignissim convallis aenean et tortor at risus viverra adipiscing. Fusce id velit ut tortor pretium viverra. Commodo odio aenean sed adipiscing diam donec. Volutpat odio facilisis mauris sit amet massa vitae tortor. Massa eget egestas purus viverra accumsan in. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Non blandit massa enim nec dui nunc mattis enim. Adipiscing tristique risus nec feugiat in fermentum posuere. Urna condimentum mattis pellentesque id.
-
-Accumsan tortor posuere ac ut consequat semper viverra. Congue nisi vitae suscipit tellus mauris a diam. Habitant morbi tristique senectus et netus et. Risus feugiat in ante metus dictum at tempor. Quam quisque id diam vel quam. Est pellentesque elit ullamcorper dignissim cras. Adipiscing enim eu turpis egestas pretium. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Tortor posuere ac ut consequat semper viverra nam libero. Hendrerit gravida rutrum quisque non tellus orci ac. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Vestibulum lectus mauris ultrices eros in cursus turpis massa. Sit amet dictum sit amet. Enim tortor at auctor urna nunc id. Semper feugiat nibh sed pulvinar proin.
-
-Mauris in aliquam sem fringilla. Facilisi nullam vehicula ipsum a arcu. Eu nisl nunc mi ipsum faucibus. Elementum nibh tellus molestie nunc non blandit massa enim nec. Mattis enim ut tellus elementum sagittis vitae et. Mauris cursus mattis molestie a iaculis at erat. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Duis convallis convallis tellus id interdum velit laoreet id donec. Eu consequat ac felis donec et odio pellentesque diam volutpat. Nibh sed pulvinar proin gravida. Leo urna molestie at elementum eu. Lobortis mattis aliquam faucibus purus in.
-
-Rutrum tellus pellentesque eu tincidunt tortor. Sit amet mattis vulputate enim nulla aliquet porttitor lacus. Augue mauris augue neque gravida. Amet facilisis magna etiam tempor orci eu. Scelerisque varius morbi enim nunc faucibus a pellentesque. Nisl pretium fusce id velit ut tortor. Eget magna fermentum iaculis eu non diam phasellus vestibulum. Tortor consequat id porta nibh venenatis cras sed felis eget. Ut consequat semper viverra nam libero justo laoreet sit amet. Cursus turpis massa tincidunt dui ut ornare lectus. Enim facilisis gravida neque convallis a cras. At ultrices mi tempus imperdiet. Non tellus orci ac auctor augue mauris augue. Tellus molestie nunc non blandit massa enim nec dui nunc. Vulputate ut pharetra sit amet aliquam id diam maecenas. Tristique magna sit amet purus gravida quis blandit. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Odio ut sem nulla pharetra diam.
-
-Sed id semper risus in hendrerit gravida rutrum. Tellus pellentesque eu tincidunt tortor aliquam. Adipiscing elit pellentesque habitant morbi tristique. Odio pellentesque diam volutpat commodo sed egestas. Integer quis auctor elit sed vulputate mi. Elementum sagittis vitae et leo duis ut diam quam nulla. Arcu dictum varius duis at. Amet venenatis urna cursus eget nunc scelerisque. Arcu bibendum at varius vel pharetra. At tellus at urna condimentum mattis. Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Sollicitudin aliquam ultrices sagittis orci a scelerisque purus semper. Nisl purus in mollis nunc sed id semper.
-
-        </p>
-        
-        <div className='back-to-top'>
-        <a href="#navigation" className="back-to-top">Back to top</a>
-        </div>
-
-
-    </section>
-	</div>
+    <div className="TicketsMembership">
+      <section id ="tickets_membership">
+      <h1 style={{ color: "#a18525" }}>Ticket & Membership</h1>
+      <div className='back-to-top'>
+      <a href="#navigation" className="back-to-top">Back to top</a>
+      </div>
+      <br/>
+      <div className="form-tabs">
+        <button className={activeForm === 'tickets' ? 'active' : ''} onClick={() => setActiveForm('tickets')}>Tickets</button>
+        <button className={activeForm === 'membership' ? 'active' : ''} onClick={() => setActiveForm('membership')}>Membership</button>
+      </div>
+      <form onSubmit={handleSubmit}>
+        {activeForm === 'tickets' && (
+          <div>
+            <br/>
+            <label>
+              Name:
+              <input type="text" name="name" value={formData.name || ''} onChange={handleFormChange} required/>
+            </label>
+            <br/>
+            <label>
+              Email:
+              <input type="email" name="email" value={formData.email || ''} onChange={handleFormChange} required />
+            </label>
+            <br/>
+            <label>
+              Number of Tickets:
+              <input type="number" name="numberOfTickets" value={formData.numberOfTickets || ''} onChange={handleFormChange} min={1} max={10} required />
+            </label>
+            <br/>
+            <label>
+                Match Date and Time:
+                <DatePicker
+                  selected={matchDateTime}
+                  onChange={date => setMatchDateTime(date)}
+                  showTimeSelect
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  placeholderText="Select match date and time"
+                  name="matchDateTime"
+                  required/>
+            </label>
+            <br/>
+            <h3>Payment Details:</h3>
+            <label>
+              Card Number:
+              <input type="text" name="cardNumber" value={formData.cardNumber || ''} onChange={handleFormChange} required />
+            </label>
+            <label>
+              Expiration Date:
+              <input type="text" name="expirationDate" value={formData.expirationDate || ''} onChange={handleFormChange} required/>
+            </label>
+            <label>
+              CVV:
+              <input type="text" name="cvv" value={formData.cvv || ''} onChange={handleFormChange} required />
+            </label>
+            <br/>
+            <br/>
+            <button type="submit">Submit Ticket Form</button>
+          </div>
+        )}
+        {activeForm === 'membership' && (
+          <div>
+            <br/>
+            <label>
+              Name:
+              <input type="text" name="name" value={formData.name || ''} onChange={handleFormChange} required/>
+            </label>
+            <br/>
+            <label>
+              Email:
+              <input type="email" name="email" value={formData.email || ''} onChange={handleFormChange} required />
+            </label>
+            <br/>
+            <label>
+              Date of Birth:
+              <DatePicker
+                selected={dateOfBirth}
+                onChange={(date) => setDateOfBirth(date)}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                placeholderText="Select date"
+                required/>
+            </label>
+            <br/>
+            <label>
+              <b>Type of Membership</b> 
+              <br/>
+              <select name="membershipType" value={formData.membershipType || ''} onChange={handleFormChange} required>
+                <option value="">Select Membership Type</option>
+                <option value="Basic">Basic</option>
+                <option value="Premium">Silver</option>
+                <option value="VIP">Gold</option>
+              </select>
+            </label>
+            <br/>
+            <h3>Payment Details:</h3>
+            <label>
+              Card Number:
+              <input type="text" name="cardNumber" value={formData.cardNumber || ''} onChange={handleFormChange} required />
+            </label> 
+            <label>
+              Expiration Date:
+              <input type="text" name="expirationDate" value={formData.expirationDate || ''} onChange={handleFormChange} required />
+            </label>
+            <label>
+              CVV:
+              <input type="text" name="cvv" value={formData.cvv || ''} onChange={handleFormChange} required />
+            </label>
+            <br/>
+            <br/>
+            <button type="submit">Submit Membership Form</button>
+          </div>
+        )}
+      </form>
+      <br/>
+      {submissionMessage && <div className="submission-message">{submissionMessage}</div>}
+      </section>
+    </div>
   );
-};
-
-export default Tickets_Membership;
+}
+export default TicketMembershipForm;

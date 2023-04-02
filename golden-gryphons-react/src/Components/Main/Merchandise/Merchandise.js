@@ -1,31 +1,145 @@
-import React from 'react';
+import React, { useState } from "react";
+import tshirtImage from "./images/tshirt.jpg";
+import hoodieImage from "./images/jumper.jpg";
+import hatImage from "./images/hat.jpg";
+import bagImage from "./images/bag.jpg";
+import mugImage from "./images/mug.jpg";
 
-const Merchandise = () => {
- 
+
+function Cart() {
+  const [cartItems, setCartItems] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+
+  function updateCart(item, price, operation) {
+    let itemFound = false;
+    let newCartItems = cartItems.map((cartItem) => {
+      if (cartItem.itemName === item) {
+        itemFound = true;
+        let quantity = cartItem.quantity;
+        if (operation === "add") {
+          quantity++;
+        } else if (operation === "remove") {
+          quantity--;
+        }
+        let newPrice = quantity * price;
+        return {
+          itemName: item,
+          price: newPrice,
+          quantity: quantity,
+        };
+      } else {
+        return cartItem;
+      }
+    });
+
+    if (!itemFound && operation === "add") {
+      newCartItems.push({
+        itemName: item,
+        price: price,
+        quantity: 1,
+      });
+    }
+
+    setCartItems(newCartItems);
+  }
+
+  function removeFromCart(item, price) {
+    let newCartItems = cartItems.filter(
+      (cartItem) => cartItem.itemName !== item
+    );
+    setCartItems(newCartItems);
+  }
+
+  function calculateTotal() {
+    let total = 0;
+    cartItems.forEach((cartItem) => {
+      total += cartItem.price;
+    });
+    setCartTotal(total);
+  }
+
+  function handleAddToCartClick(item, price) {
+    updateCart(item, price, "add");
+    calculateTotal();
+  }
+
+  function handleRemoveFromCartClick(item, price) {
+    updateCart(item, price, "remove");
+    calculateTotal();
+  }
+
   return (
-	<div className="Merchandise">
-    <section id = "merchandise">
-      <h1>Merchandise</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut lectus arcu bibendum at varius. Tortor dignissim convallis aenean et tortor at risus viverra adipiscing. Fusce id velit ut tortor pretium viverra. Commodo odio aenean sed adipiscing diam donec. Volutpat odio facilisis mauris sit amet massa vitae tortor. Massa eget egestas purus viverra accumsan in. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Non blandit massa enim nec dui nunc mattis enim. Adipiscing tristique risus nec feugiat in fermentum posuere. Urna condimentum mattis pellentesque id.
-
-Accumsan tortor posuere ac ut consequat semper viverra. Congue nisi vitae suscipit tellus mauris a diam. Habitant morbi tristique senectus et netus et. Risus feugiat in ante metus dictum at tempor. Quam quisque id diam vel quam. Est pellentesque elit ullamcorper dignissim cras. Adipiscing enim eu turpis egestas pretium. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Tortor posuere ac ut consequat semper viverra nam libero. Hendrerit gravida rutrum quisque non tellus orci ac. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Vestibulum lectus mauris ultrices eros in cursus turpis massa. Sit amet dictum sit amet. Enim tortor at auctor urna nunc id. Semper feugiat nibh sed pulvinar proin.
-
-Mauris in aliquam sem fringilla. Facilisi nullam vehicula ipsum a arcu. Eu nisl nunc mi ipsum faucibus. Elementum nibh tellus molestie nunc non blandit massa enim nec. Mattis enim ut tellus elementum sagittis vitae et. Mauris cursus mattis molestie a iaculis at erat. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Duis convallis convallis tellus id interdum velit laoreet id donec. Eu consequat ac felis donec et odio pellentesque diam volutpat. Nibh sed pulvinar proin gravida. Leo urna molestie at elementum eu. Lobortis mattis aliquam faucibus purus in.
-
-Rutrum tellus pellentesque eu tincidunt tortor. Sit amet mattis vulputate enim nulla aliquet porttitor lacus. Augue mauris augue neque gravida. Amet facilisis magna etiam tempor orci eu. Scelerisque varius morbi enim nunc faucibus a pellentesque. Nisl pretium fusce id velit ut tortor. Eget magna fermentum iaculis eu non diam phasellus vestibulum. Tortor consequat id porta nibh venenatis cras sed felis eget. Ut consequat semper viverra nam libero justo laoreet sit amet. Cursus turpis massa tincidunt dui ut ornare lectus. Enim facilisis gravida neque convallis a cras. At ultrices mi tempus imperdiet. Non tellus orci ac auctor augue mauris augue. Tellus molestie nunc non blandit massa enim nec dui nunc. Vulputate ut pharetra sit amet aliquam id diam maecenas. Tristique magna sit amet purus gravida quis blandit. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Odio ut sem nulla pharetra diam.
-
-Sed id semper risus in hendrerit gravida rutrum. Tellus pellentesque eu tincidunt tortor aliquam. Adipiscing elit pellentesque habitant morbi tristique. Odio pellentesque diam volutpat commodo sed egestas. Integer quis auctor elit sed vulputate mi. Elementum sagittis vitae et leo duis ut diam quam nulla. Arcu dictum varius duis at. Amet venenatis urna cursus eget nunc scelerisque. Arcu bibendum at varius vel pharetra. At tellus at urna condimentum mattis. Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus et. Sollicitudin aliquam ultrices sagittis orci a scelerisque purus semper. Nisl purus in mollis nunc sed id semper.
-
-        </p>
-        
-        <div className='back-to-top'>
-        <a href="#navigation" className="back-to-top">Back to top</a>
-        </div>
-
-    </section>
-	</div>
+    <div>
+      <section id ="merchandise"/>
+      <h1 style={{ color: "#a18525" }}>Merchandise</h1>
+      <ul style={{ listStyle: 'none' }}>
+        <li>
+          <img src= {tshirtImage} alt="T-Shirt" />
+          <br/>
+          T-Shirt - $35
+          <br/>
+          <button onClick={() => handleAddToCartClick("T-Shirt", 35)}>
+            Add to Cart
+          </button>
+        </li>
+        <li>
+          <img src= {hoodieImage} alt="Hoodie" />
+          <br/>
+          Hoodie - $50 
+          <br/>
+          <button onClick={() => handleAddToCartClick("Hoodie", 50)}>
+            Add to Cart
+          </button>
+        </li>
+        <li>
+          <img src= {hatImage} alt="Hat" />
+          <br/>
+          Hat - $25
+          <br/>
+          <button onClick={() => handleAddToCartClick("Hat", 25)}>
+            Add to Cart
+          </button>
+        </li>
+        <li>
+          <img src= {bagImage} alt="Bag" />
+          <br/>
+          Bag - $60
+          <br/>
+          <button onClick={() => handleAddToCartClick("Bag", 60)}>
+            Add to Cart
+          </button>
+        </li>
+        <li>
+          <img src= {mugImage} alt="Mug" />
+          <br/>
+          Mug - $15
+          <br/>
+          <button onClick={() => handleAddToCartClick("Mug", 15)}>
+            Add to Cart
+          </button>
+        </li>
+      </ul>
+      <h2>Cart</h2>
+      <ul>
+        {cartItems.map((cartItem) => (
+          <li key={cartItem.itemName}>
+            {cartItem.itemName} - ${cartItem.price} ({cartItem.quantity})
+            <button
+              onClick={() => handleRemoveFromCartClick(cartItem.itemName, cartItem.price)}
+            >
+              Remove from Cart
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div>Total: ${cartTotal}</div>
+      <br/>
+      <br/>
+      <div className='back-to-top'>
+      <a href="#navigation" className="back-to-top">Back to top</a>
+      </div>
+    </div>
   );
-};
+}
 
-export default Merchandise;
+export default Cart;
