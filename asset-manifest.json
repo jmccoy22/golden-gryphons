@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/github-pages-app/static/css/main.1a5a49f2.css",
+    "main.js": "/github-pages-app/static/js/main.614d2d5c.js",
+    "static/js/787.d74bc534.chunk.js": "/github-pages-app/static/js/787.d74bc534.chunk.js",
+    "static/media/golden_gryphon_logo.png": "/github-pages-app/static/media/golden_gryphon_logo.20bd565772a5515a690b.png",
+    "static/media/elsie.jpg": "/github-pages-app/static/media/elsie.4dbecb364c37ea4798c3.jpg",
+    "static/media/yvonne.jpg": "/github-pages-app/static/media/yvonne.aa4eb1572379882749e0.jpg",
+    "static/media/kara.jpg": "/github-pages-app/static/media/kara.3c672779063c76b40d1a.jpg",
+    "static/media/kayleen.jpg": "/github-pages-app/static/media/kayleen.307b21551274d2766a69.jpg",
+    "static/media/mattie.jpg": "/github-pages-app/static/media/mattie.23158972316dbbf0b107.jpg",
+    "static/media/maddy.jpg": "/github-pages-app/static/media/maddy.97d8119c42d722ba922b.jpg",
+    "static/media/jumper.jpg": "/github-pages-app/static/media/jumper.dbf776da79025d33a917.jpg",
+    "static/media/julie.jpg": "/github-pages-app/static/media/julie.977072c3e4dbf4125905.jpg",
+    "index.html": "/github-pages-app/index.html",
+    "main.1a5a49f2.css.map": "/github-pages-app/static/css/main.1a5a49f2.css.map",
+    "main.614d2d5c.js.map": "/github-pages-app/static/js/main.614d2d5c.js.map",
+    "787.d74bc534.chunk.js.map": "/github-pages-app/static/js/787.d74bc534.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1a5a49f2.css",
+    "static/js/main.614d2d5c.js"
+  ]
+}
